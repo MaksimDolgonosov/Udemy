@@ -33,9 +33,20 @@ if (PersonalMovieDB.count < 10) {
 } else if (PersonalMovieDB.count >= 30) {
     console.log("Вы киноман");
 } else {
-    console.log("Произола ошибка")
+    console.log("Произола ошибка");
 }
 
+function showMyDB() {
+    if (!PersonalMovieDB.privat) {
+        console.log(PersonalMovieDB);
+    }
 
+}
 
-console.log(PersonalMovieDB);
+function writeYourGenres() {
+    for (let i = 1; i < 4; i++) {
+        let a = prompt(`Ваш любимый жанр под номером ${i}`);
+        PersonalMovieDB.genres.push(a);
+
+    }
+}
