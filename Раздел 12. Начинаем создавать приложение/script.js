@@ -45,15 +45,29 @@ const PersonalMovieDB = {
     writeYourGenres: function () {
         for (let i = 1; i < 4; i++) {
             let genre = prompt(`Ваш любимый жанр под номером ${i}`);
-            this.genres[i - 1] = genre;
+            if (genre != "" || genre != null) {
+                this.genres[i - 1] = genre;
+            } else {
+                i--;
+            }
+            this.genres.forEach((item, i) => {
+                console.log(`Любимый жанр № ${i + 1} - это ${item}`);
+            });
 
+        }
+    },
+    toggleVisibleMyDB: function () {
+        if (this.privat) {
+            this.privat = false;
+        } else {
+            this.privat = true;
         }
     }
 };
 
 
-PersonalMovieDB.rememberMyFlms();
-console.log(PersonalMovieDB);
+// PersonalMovieDB.writeYourGenres();
+
 
 
 
