@@ -16,7 +16,7 @@
 
 const movieDB = {
     movies: [
-        "Логан",
+        "Логанннннн",
         "Лига справедливости",
         "Ла-ла лэнд",
         "Одержимость",
@@ -40,4 +40,10 @@ document.getElementsByClassName("promo__genre")[0].innerHTML="ДРАММА";
 //3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
 //Реализовать только при помощи JS
 document.getElementsByClassName("promo__bg")[0].style.backgroundImage="url(img/bg.jpg)";
-console.log(document.getElementsByClassName("promo__bg")[0]);
+
+//4) Список фильмов на странице сформировать на основании данных из этого JS файла.
+//Отсортировать их по алфавиту 
+let list = document.querySelectorAll(".promo__interactive-item");
+console.log(list[0].innerHTML);
+
+list[0].innerHTML=movieDB.movies[0];
