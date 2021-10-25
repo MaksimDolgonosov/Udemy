@@ -12,11 +12,11 @@
 
 5) Добавить нумерацию выведенных фильмов */
 
-//"use strict";
+"use strict";
 
 const movieDB = {
     movies: [
-        "Логанннннн",
+        "Логан",
         "Лига справедливости",
         "Ла-ла лэнд",
         "Одержимость",
@@ -43,7 +43,14 @@ document.getElementsByClassName("promo__bg")[0].style.backgroundImage="url(img/b
 
 //4) Список фильмов на странице сформировать на основании данных из этого JS файла.
 //Отсортировать их по алфавиту 
-let list = document.querySelectorAll(".promo__interactive-item");
-console.log(list[0].innerHTML);
 
-list[0].innerHTML=movieDB.movies[0];
+movieDB.movies.sort();
+let list = document.querySelectorAll(".promo__interactive-item");
+list.forEach(element => {
+    element.style.cssText="text-transform: none";
+});
+for (let i = 0; i < movieDB.movies.length; i++) {
+    list[i].innerHTML=`${i+1}. `+movieDB.movies[i]+`<div class="delete"></div>`;
+    
+}
+

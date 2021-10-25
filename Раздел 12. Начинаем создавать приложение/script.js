@@ -65,10 +65,11 @@ const PersonalMovieDB = {
     }
 };
 
+if (0&&2) {
+console.log(+"Infinity");
+}
 
-// PersonalMovieDB.writeYourGenres();
-
-
+console.log(null&&0);
 
 
 
