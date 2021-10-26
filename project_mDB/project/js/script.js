@@ -12,7 +12,7 @@
 
 5) Добавить нумерацию выведенных фильмов */
 
-"use strict";
+//"use strict";
 document.addEventListener("DOMContentLoaded", ()=>{
 const movieDB = {
     movies: [
@@ -53,22 +53,28 @@ for (let i = 0; i < movieDB.movies.length; i++) {
     list[i].innerHTML=`${i+1}. `+movieDB.movies[i]+`<div class="delete"></div>`;
 }
 
+
+
 //Раздел 33. Практика. События на странице.
 
-let bnt=document.querySelector(".yes").nextElementSibling;
+// let addForm = document.querySelector('form.add');
 
-bnt.addEventListener("click",addFilm);
+// addForm.addEventListener("submit", (event)=>{
+// event.preventDefault();
+// });
 
 
-
-// document.querySelector(".yes").nextElementSibling.onclick=addFilm;
-// console.log(document.querySelector(".yes").nextElementSibling);
-function addFilm () {
-  let a =document.querySelector(".adding__input").value;
-    console.log(a);
-
-   // movieDB.movies.push(a);
-
+let addForm=document.querySelector('form.add');
+addForm.submit=toStopReload;
+function toStopReload(event) {
+    event.preventDefault();
 }
+
+
+document.querySelector(".yes").nextElementSibling.onclick=addYourFilm;
+function addYourFilm(){
+console.log(document.querySelector(".adding__input").value);
+}
+
 
 });

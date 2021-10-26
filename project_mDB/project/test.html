@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input class="adding__input" type="text" placeholder="Что уже посмотрено...?">
+    <button>Подтвердить</button>
+
+    <script>
+        document.querySelector(".adding__input").nextElementSibling.onclick=addYourFilm;
+        
+        function addYourFilm(){
+        console.log(document.querySelector(".adding__input").value);
+         }
+    </script>
+    
+</body>
+</html>
