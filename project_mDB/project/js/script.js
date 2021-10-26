@@ -13,7 +13,7 @@
 5) Добавить нумерацию выведенных фильмов */
 
 "use strict";
-
+document.addEventListener("DOMContentLoaded", ()=>{
 const movieDB = {
     movies: [
         "Логан",
@@ -35,11 +35,11 @@ let fordel=document.querySelector(".promo__adv").getElementsByTagName("*");
 
 
  //2) Изменить жанр фильма, поменять "комедия" на "драма"
-document.getElementsByClassName("promo__genre")[0].innerHTML="ДРАММА";
+document.querySelector(".promo__genre").innerHTML="ДРАММА";
 
 //3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
 //Реализовать только при помощи JS
-document.getElementsByClassName("promo__bg")[0].style.backgroundImage="url(img/bg.jpg)";
+document.querySelector(".promo__bg").style.backgroundImage="url(img/bg.jpg)";
 
 //4) Список фильмов на странице сформировать на основании данных из этого JS файла.
 //Отсортировать их по алфавиту 
@@ -51,6 +51,24 @@ list.forEach(element => {
 });
 for (let i = 0; i < movieDB.movies.length; i++) {
     list[i].innerHTML=`${i+1}. `+movieDB.movies[i]+`<div class="delete"></div>`;
-    
 }
 
+//Раздел 33. Практика. События на странице.
+
+let bnt=document.querySelector(".yes").nextElementSibling;
+
+bnt.addEventListener("click",addFilm);
+
+
+
+// document.querySelector(".yes").nextElementSibling.onclick=addFilm;
+// console.log(document.querySelector(".yes").nextElementSibling);
+function addFilm () {
+  let a =document.querySelector(".adding__input").value;
+    console.log(a);
+
+   // movieDB.movies.push(a);
+
+}
+
+});

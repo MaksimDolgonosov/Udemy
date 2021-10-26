@@ -65,15 +65,18 @@ const PersonalMovieDB = {
     }
 };
 
-if (0&&2) {
-console.log(+"Infinity");
+
+let btn=document.querySelector("button");
+
+
+function delElem(e){
+    console.log(e.target);
 }
 
-console.log(null&&0);
+btn.addEventListener("click",delElem);
 
 
-
-
+btn.removeEventListener("click",delElem);
 
 
 

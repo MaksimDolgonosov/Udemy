@@ -9,23 +9,25 @@
 </head>
 
 <body>
+    
+            <input class="adding__input" type="text" placeholder="Что уже посмотрено...?">
+
+            <button>Подтвердить</button>
+            
 
     <script>
+document.querySelector(".adding__input").nextElementSibling.onclick=addFilm;
 
-        let soldier = {
-            health: 400,
-            armor: 100
-        };
+function addFilm () {
+    
+  let a =document.querySelector(".adding__input").value;
+    console.log(a);
 
-        let John = {
-            health: 250
-        };
+ 
+
+}
 
 
-        John.__proto__ = soldier;
-
-        console.log(John);
-        console.log(John.armor);
 
     </script>
 
