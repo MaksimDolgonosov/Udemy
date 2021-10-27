@@ -54,11 +54,21 @@ for (let i = 0; i < movieDB.movies.length; i++) {
 }
 
 
+<<<<<<< Updated upstream
 
 //Раздел 33. Практика. События на странице.
+=======
+let addForm=document.querySelector(".add");
+
+addForm.addEventListener("submit",(event)=>{
+event.preventDefault();
+});
+
+>>>>>>> Stashed changes
 
 // let addForm = document.querySelector('form.add');
 
+<<<<<<< Updated upstream
 // addForm.addEventListener("submit", (event)=>{
 // event.preventDefault();
 // });
@@ -69,6 +79,15 @@ addForm.submit=toStopReload;
 function toStopReload(event) {
     event.preventDefault();
 }
+=======
+document.querySelector(".yes").nextElementSibling.onclick=addFilm;
+
+function addFilm () {
+  let a =document.querySelector(".adding__input").value;
+    console.log(a);
+
+   movieDB.movies.push(a);
+>>>>>>> Stashed changes
 
 
 document.querySelector(".yes").nextElementSibling.onclick=addYourFilm;
