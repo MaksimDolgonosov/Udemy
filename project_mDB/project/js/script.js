@@ -58,6 +58,7 @@ list.forEach(element => {
  element.style.cssText="text-transform: capitalize";
 });
 }
+
 addFilmToForm();
 //Раздел 33. Практика. События на странице.
 
@@ -74,7 +75,7 @@ function addFilm () {
   let a =document.querySelector(".adding__input").value;
   let b =a.slice(0,21);
   if (a==""){
-    alert("Введите фильм");
+    //alert("Введите фильм");
       }else if (a.length<22) {
     movieDB.movies.push(a);
   } else {      
@@ -90,14 +91,19 @@ function addFilm () {
 
 //Удаление фильма при нажатии на корзину
 let delFilm=document.querySelectorAll(".delete");
-delFilm.forEach(element => {
-    element.onclick=remFilm;
+
+delFilm.forEach((element, i) => {
+    element.addEventListener("click",()=>{
+        element.parentElement.remove();
+        movieDB.movies.slice(i,1);
+        
+    });
 });
 
-function remFilm(e){
-    e.target.parentElement.remove();
-
-}
+// function remFilm(e){
+//     e.target.parentElement.remove();
+//     movieDB.movies[i].slice();
+//     console.log(movieDB.movies);
+// }
 console.log(movieDB.movies);
 });
-
