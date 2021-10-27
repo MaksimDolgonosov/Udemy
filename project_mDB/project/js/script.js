@@ -64,11 +64,11 @@ addForm.addEventListener("submit",(event)=>{
 event.preventDefault();
 });
 
->>>>>>> Stashed changes
+
 
 // let addForm = document.querySelector('form.add');
 
-<<<<<<< Updated upstream
+
 // addForm.addEventListener("submit", (event)=>{
 // event.preventDefault();
 // });
@@ -87,7 +87,7 @@ function addFilm () {
     console.log(a);
 
    movieDB.movies.push(a);
->>>>>>> Stashed changes
+
 
 
 document.querySelector(".yes").nextElementSibling.onclick=addYourFilm;
