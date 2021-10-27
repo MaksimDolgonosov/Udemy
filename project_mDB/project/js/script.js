@@ -67,32 +67,37 @@ addForm.addEventListener("submit",(event)=>{
 event.preventDefault();
 });
 
-
+//Добавление фильма в форму
 document.querySelector(".yes").nextElementSibling.onclick=addFilm;
 
 function addFilm () {
   let a =document.querySelector(".adding__input").value;
   let b =a.slice(0,21);
-  if (a.length<22) {
+  if (a==""){
+    alert("Введите фильм");
+      }else if (a.length<22) {
     movieDB.movies.push(a);
-  } else{      
+  } else {      
     (movieDB.movies.push(b+"..."));
   }
   if (document.querySelector(".yes").previousElementSibling.checked) {
     console.log(`Добавляем любимый фильм ${b}...`);
 }
    addFilmToForm();
-
+   document.querySelector(".adding__input").value="";
+   console.log(movieDB.movies);
 }
 
+//Удаление фильма при нажатии на корзину
 let delFilm=document.querySelectorAll(".delete");
 delFilm.forEach(element => {
     element.onclick=remFilm;
 });
 
 function remFilm(e){
-    console.log(e.target.previousElementSibling);
-}
+    e.target.parentElement.remove();
 
+}
+console.log(movieDB.movies);
 });
 
