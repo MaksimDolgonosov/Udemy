@@ -12,7 +12,7 @@
 
 5) Добавить нумерацию выведенных фильмов */
 
-//"use strict";
+"use strict";
 document.addEventListener("DOMContentLoaded", ()=> {
 const movieDB = {
     movies: [
@@ -23,16 +23,23 @@ const movieDB = {
         "Скотт Пилигрим против..."
     ]
 };
+const adv = document.querySelectorAll('.promo__adv img'),
+   poster = document.querySelector('.promo__bg'),
+    genre = poster.querySelector('.promo__genre'), 
+movieList = document.querySelector('.promo__interactive-list'),
+  addForm = document.querySelector('form.add'),
+ addInput = addForm.querySelector('.adding__input'),
+ checkbox = addForm.querySelector('[type="checkbox"]'),
+ favorite = checkbox.checked;
 
-//1) Удалить все рекламные блоки со страницы (правая часть сайта)
+  //1) Удалить все рекламные блоки со страницы (правая часть сайта)
 
-//document.querySelector(".promo__adv").remove();
-
-let fordel=document.querySelector(".promo__adv").getElementsByTagName("*");
- for (let i = 3; i > 0; i--) {
-    fordel[i].remove();
- }
-
+let deleteAdv = (arr)=>{
+  arr.forEach(item => {
+    item.remove();
+});
+};
+deleteAdv(adv);
 
  //2) Изменить жанр фильма, поменять "комедия" на "драма"
 document.querySelector(".promo__genre").textContent="ДРАМА";
@@ -43,67 +50,78 @@ document.querySelector(".promo__bg").style.backgroundImage="url(img/bg.jpg)";
 
 //4) Список фильмов на странице сформировать на основании данных из этого JS файла.
 //Отсортировать их по алфавиту 
-function addFilmToForm(){
-movieDB.movies.sort();
-let movieList = document.querySelector(".promo__interactive-list");
-movieList.innerHTML="";
-movieDB.movies.forEach((film,i)=>{
-movieList.innerHTML+= `
-<li class="promo__interactive-item">${i+1}. ${film}
-<div class="delete"></div>
-</li>`;
-});
- let list = document.querySelectorAll(".promo__interactive-item");
-list.forEach(element => {
- element.style.cssText="text-transform: capitalize";
-});
-}
 
-addFilmToForm();
+let sortArr = (arr) => {
+  arr.sort();
+};
+//sortArr(movieDB.movies);
+
+
+function createMovieList(films, parent) {
+  parent.innerHTML = "";
+  sortArr(films);
+
+  films.forEach((film, i) => {
+      parent.innerHTML += `
+          <li class="promo__interactive-item">${i + 1} ${film}
+              <div class="delete"></div>
+          </li>
+      `;
+  let list = document.querySelectorAll(".promo__interactive-item");
+ list.forEach(element => {
+  element.style.cssText="text-transform: capitalize";
+  });
+      
+  });
+  
+  document.querySelectorAll('.delete').forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+        btn.parentElement.remove();
+        movieDB.movies.splice(i, 1);
+  
+        createMovieList(films, parent);
+    });
+  });
+ }
+
+createMovieList(movieDB.movies,movieList);
+
 //Раздел 33. Практика. События на странице.
+//Добавление фильма в форму
 
-let addForm=document.querySelector(".add");
 
-addForm.addEventListener("submit",(event)=>{
-event.preventDefault();
+addForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  let newFilm = addInput.value;
+  const favorite = checkbox.checked;
+
+  if (newFilm) {
+
+      if (newFilm.length > 21) {
+          newFilm = `${newFilm.substring(0, 22)}...`;
+      }
+
+      if (favorite) {
+          console.log("Добавляем любимый фильм");
+      }
+
+      movieDB.movies.push(newFilm);
+      sortArr(movieDB.movies);
+
+      createMovieList(movieDB.movies, movieList);
+  }
+
+  event.target.reset();
+
 });
 
-//Добавление фильма в форму
-document.querySelector(".yes").nextElementSibling.onclick=addFilm;
 
-function addFilm () {
-  let a =document.querySelector(".adding__input").value;
-  let b =a.slice(0,21);
-  if (a==""){
-    //alert("Введите фильм");
-      }else if (a.length<22) {
-    movieDB.movies.push(a);
-  } else {      
-    (movieDB.movies.push(b+"..."));
-  }
-  if (document.querySelector(".yes").previousElementSibling.checked) {
-    console.log(`Добавляем любимый фильм ${b}...`);
-}
-   addFilmToForm();
-   document.querySelector(".adding__input").value="";
-   console.log(movieDB.movies);
-}
 
 //Удаление фильма при нажатии на корзину
-let delFilm=document.querySelectorAll(".delete");
 
-delFilm.forEach((element, i) => {
-    element.addEventListener("click",()=>{
-        element.parentElement.remove();
-        movieDB.movies.slice(i,1);
-        
-    });
-});
 
-// function remFilm(e){
-//     e.target.parentElement.remove();
-//     movieDB.movies[i].slice();
-//     console.log(movieDB.movies);
-// }
-console.log(movieDB.movies);
+
+
+
 });
