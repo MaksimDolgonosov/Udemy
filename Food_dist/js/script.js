@@ -40,15 +40,15 @@ const deadline = '2021-11-06';
 
 function getTimeRemanig(endtime) {
 let t =  Date.parse(endtime)- Date.parse(Date());
-console.log(t/(1000*60*60*24));
+
 let days=Math.floor(t/(1000*60*60*24));
-console.log(days+" дней");
+
 let hours=Math.floor((t/(1000*60*60)%24)-3);
-console.log(hours+" часов");
+
 let minutes=Math.floor(t/(1000*60)%60);
-console.log(minutes+" минут");
+
 let seconds=Math.floor(t/1000%60);
-console.log(seconds+" секунд");
+
 return {
 "total": t,
 "days" : days,
@@ -88,7 +88,40 @@ function getZero(num){
     }
 }
 
+// Открытие модального окна
+const modal=document.querySelector(".modal");
+//const styleOfModal=window.getComputedStyle(modal);
+//console.log(styleOfModal);
 
+const modalTrigger=document.querySelectorAll("[data-modal"),
+      btnClose=document.querySelector("[data-close");
+
+    modalTrigger.forEach(btn=>{
+    btn.addEventListener("click", event=>{
+    modal.classList.add("show");
+    modal.classList.remove("hide");
+   // modal.classList.toggle("show");
+    document.body.style.overflow="hidden";
+    });
+});
+
+
+btnClose.addEventListener("click",()=>{
+    modal.classList.add("hide");
+    modal.classList.remove("show");
+     // modal.classList.toggle("show");
+     document.body.style.overflow="";
+    
+});
+
+modal.addEventListener("click",e=>{
+    if (e.target==modal){
+        modal.classList.add("hide");
+        modal.classList.remove("show");
+         // modal.classList.toggle("show");
+         document.body.style.overflow="";
+    }
+});
 
 
 });// конец DOMContentLoaded
