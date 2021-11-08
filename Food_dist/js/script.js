@@ -103,12 +103,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-    setTimeout(openModal, 2000);
+    const setTimeoutId = setTimeout(openModal, 2000);
     function openModal() {
         modal.classList.add("show");
         modal.classList.remove("hide");
         // modal.classList.toggle("show");
         document.body.style.overflow = "hidden";
+        clearTimeout(setTimeoutId);
     }
 
     function closeModal() {
