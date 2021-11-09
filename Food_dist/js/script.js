@@ -31,7 +31,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    const deadline = '2021-11-06';
+    const deadline = '2021-11-10';
     // console.log(Date.parse('2021-11-04'));
     // let T= Date.parse(deadline)-Date.parse(new Date());
     // console.log(T/(1000*60*60));
@@ -73,8 +73,9 @@ window.addEventListener("DOMContentLoaded", () => {
             hours.innerHTML = getZero(t.hours);
             minutes.innerHTML = getZero(t.minutes);
             seconds.innerHTML = getZero(t.seconds);
-            if (t <= 0) {
+            if (t.total <= 0) {
                 clearInterval(SetInterval);
+
             }
         }
     }
@@ -103,7 +104,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-    const setTimeoutId = setTimeout(openModal, 2000);
+    const setTimeoutId = setTimeout(openModal, 7000);
     function openModal() {
         modal.classList.add("show");
         modal.classList.remove("hide");
@@ -132,6 +133,16 @@ window.addEventListener("DOMContentLoaded", () => {
             closeModal();
         }
     });
+
+    function openModalInTheEnd() {
+        if (document.documentElement.scrollTop + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+            openModal();
+            window.removeEventListener("scroll", openModalInTheEnd);
+        }
+
+    }
+
+    window.addEventListener("scroll", openModalInTheEnd);
 
 });// конец DOMContentLoaded
 
