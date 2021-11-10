@@ -9,25 +9,41 @@
 </head>
 
 <body>
-    
-            <input class="adding__input" type="text" placeholder="Что уже посмотрено...?">
 
-            <button>Подтвердить</button>
-            
+    <input class="adding__input" type="text" placeholder="Что уже посмотрено...?">
+
+    <button>Подтвердить</button>
+
 
     <script>
-document.querySelector(".adding__input").nextElementSibling.onclick=addFilm;
 
-function addFilm () {
-    
-  let a =document.querySelector(".adding__input").value;
-    console.log(a);
+        class Rectangle {
 
- 
+            constructor(height, width) {
+                this.height = height;
+                this.width = width;
+            }
 
-}
+            calcArea() {
+                return this.height * this.width;
+            }
+        };
 
+        const square = new Rectangle(10, 20);
+        console.log(square.calcArea());
 
+        class ColoredRectangleWithText extends Rectangle {
+            constructor(height, width, text, color) {
+                super(height, width);
+                this.text = text;
+                this.color = color;
+            }
+            // summ() {
+            //     return super.calcArea();
+            // }
+        }
+        const coloredSquare = new ColoredRectangleWithText(10, 20, "Hello", "red");
+        console.log(coloredSquare.calcArea());
 
     </script>
 
