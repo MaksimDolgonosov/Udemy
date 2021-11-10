@@ -75,7 +75,10 @@ window.addEventListener("DOMContentLoaded", () => {
             seconds.innerHTML = getZero(t.seconds);
             if (t.total <= 0) {
                 clearInterval(SetInterval);
-
+                days.innerHTML = "00";
+                hours.innerHTML = "00";
+                minutes.innerHTML = "00";
+                seconds.innerHTML = "00";
             }
         }
     }
@@ -104,7 +107,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-    const setTimeoutId = setTimeout(openModal, 7000);
+    const setTimeoutId = setTimeout(openModal, 9997000);
     function openModal() {
         modal.classList.add("show");
         modal.classList.remove("hide");
@@ -143,6 +146,40 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     window.addEventListener("scroll", openModalInTheEnd);
+
+    // Создание карточек через классы (Раздел 48)
+
+    class Cards {
+        constructor(img, alt, name, text, price, parentSelector) {
+            this.img = img;
+            this.alt = alt;
+            this.name = name;
+            this.text = text;
+            this.price = price;
+            this.parent = document.querySelector(parentSelector);
+        }
+        rendle() {
+            let element = document.createElement("div");
+            element.innerHTML =
+                `<img src=${this.img} alt=${this.alt}>
+                <h3 class="menu__item-subtitle">Меню ${this.name}</h3>
+                <div class="menu__item-descr">${this.text}</div>
+                <div class="menu__item-divider"></div>
+                <div class="menu__item-price">
+                <div class="menu__item-cost">Цена:</div>
+                <div class="menu__item-total"><span>${this.price}</span> грн/день</div>`;
+            this.parent.append(element);
+        }
+
+    }
+
+    const card1 = new Cards("img/tabs/elite.jpg", "vegy", "Меню капитальное", "Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.", "9999", ".menu .container");
+    card1.rendle();
+    //document.querySelector(".menu__item").innerHTML = card1.rendle();
+
+
+
+
 
 });// конец DOMContentLoaded
 
