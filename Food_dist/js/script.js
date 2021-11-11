@@ -150,15 +150,16 @@ window.addEventListener("DOMContentLoaded", () => {
     // Создание карточек через классы (Раздел 48)
 
     class Cards {
-        constructor(img, alt, name, text, price, parentSelector) {
+        constructor(img, alt, name, text, price, parentSelector, ...classes) {
             this.img = img;
             this.alt = alt;
             this.name = name;
             this.text = text;
             this.price = price;
             this.parent = document.querySelector(parentSelector);
+            this.classes = classes;
             this.transfer = 27;
-            this.changeToUAH();
+            this.changeToUAH();// уточнить
         }
 
         changeToUAH() {
@@ -166,9 +167,14 @@ window.addEventListener("DOMContentLoaded", () => {
         }
         rendle() {
             let element = document.createElement("div");
+            if (this.classes.length == 0) {
+                //this.element = "menu__item";
+                element.classList.add("menu__item");
+            } else {
+                this.classes.forEach(className => element.classList.add(className));
+            }
             element.innerHTML =
-                `<div class="menu__item">
-                <img src=${this.img} alt=${this.alt}>
+                `<img src=${this.img} alt=${this.alt}>
                 <h3 class="menu__item-subtitle">${this.name}</h3>
                 <div class="menu__item-descr">${this.text}</div>
                 <div class="menu__item-divider"></div>
@@ -187,7 +193,8 @@ window.addEventListener("DOMContentLoaded", () => {
         'Меню "Фитнес"',
         'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
         10,
-        ".menu .container")
+        ".menu .container",
+    )
         .rendle();
 
     new Cards(
@@ -195,17 +202,20 @@ window.addEventListener("DOMContentLoaded", () => {
         "elite",
         'Меню "Премиум"',
         'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
-        10,
-        ".menu .container")
+        20,
+        ".menu .container",
+        "menu__item")
         .rendle();
 
     new Cards(
-        "img/tabs/vegy.jpg",
-        "vegy",
-        'Меню "Фитнес"',
-        'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
-        10,
-        ".menu .container")
+        "img/tabs/post.jpg",
+        "post",
+        'Меню "Постное"',
+        'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
+        30,
+        ".menu .container",
+        "menu__item",
+        "big")
         .rendle();
 
 
