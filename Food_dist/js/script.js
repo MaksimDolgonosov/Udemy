@@ -107,7 +107,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-    const setTimeoutId = setTimeout(openModal, 9997000);
+    // const setTimeoutId = setTimeout(openModal, 9997000);
     function openModal() {
         modal.classList.add("show");
         modal.classList.remove("hide");
@@ -139,13 +139,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
     function openModalInTheEnd() {
         if (document.documentElement.scrollTop + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+            console.log("safa");
             openModal();
             window.removeEventListener("scroll", openModalInTheEnd);
         }
-
     }
 
     window.addEventListener("scroll", openModalInTheEnd);
+
+
 
     // Создание карточек через классы (Раздел 48)
 
