@@ -107,7 +107,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // const setTimeoutId = setTimeout(openModal, 9997000);
+    const setTimeoutId = setTimeout(openModal, 9997000);
     function openModal() {
         modal.classList.add("show");
         modal.classList.remove("hide");
