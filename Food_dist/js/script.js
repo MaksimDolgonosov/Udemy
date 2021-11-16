@@ -97,8 +97,8 @@ window.addEventListener("DOMContentLoaded", () => {
     //const styleOfModal=window.getComputedStyle(modal);
     //console.log(styleOfModal);
 
-    const modalTrigger = document.querySelectorAll("[data-modal"),
-        btnClose = document.querySelector("[data-close");
+    const modalTrigger = document.querySelectorAll("[data-modal");
+    // const btnClose = document.querySelector("[data-close]");
 
     modalTrigger.forEach(btn => {
         btn.addEventListener("click", openModal);
@@ -108,6 +108,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
     const setTimeoutId = setTimeout(openModal, 9997000);
+
     function openModal() {
         modal.classList.add("show");
         modal.classList.remove("hide");
@@ -123,10 +124,10 @@ window.addEventListener("DOMContentLoaded", () => {
         document.body.style.overflow = "";
     }
 
-    btnClose.addEventListener("click", closeModal);
+    //btnClose.addEventListener("click", closeModal);
 
-    modal.addEventListener("click", e => {
-        if (e.target === modal) {
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal || e.target.classList.contains(`modal__close`)) {  //e.target.getAttribute(`modal-close`)=="";
             closeModal();
         }
     });
@@ -269,9 +270,23 @@ window.addEventListener("DOMContentLoaded", () => {
                 }
             });
         });
-
     }
 
+    function showThanksModal() {
+        const prevModalDialog = document.querySelector(".modal__dialog");
+        prevModalDialog.classList.add("hide");
+        openModal();
+
+        const thanksModal = document.createElement("div");
+        thanksModal.classList.add("modal__dialog");
+        thanksModal.innerHTML = `
+        <div class="modal__content">
+        <div data-close class="modal__close">&times;</div>
+        <div class="modal__title">Спасибо!</div>
+        </div>
+        `;
+    }
+    document.querySelector(".modal").append(thanksModal);
 
 });// конец DOMContentLoaded
 
