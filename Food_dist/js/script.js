@@ -139,15 +139,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
     function openModalInTheEnd() {
         if (document.documentElement.scrollTop + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
-            console.log("safa");
             openModal();
             window.removeEventListener("scroll", openModalInTheEnd);
         }
+
     }
 
     window.addEventListener("scroll", openModalInTheEnd);
-
-
 
     // Создание карточек через классы (Раздел 48)
 
@@ -220,7 +218,59 @@ window.addEventListener("DOMContentLoaded", () => {
         "big")
         .rendle();
 
+    // Отправка формы на сервер php
 
+    let forms = document.querySelectorAll('form');
+
+    const message = {
+        loading: "Загрузка...",
+        success: "Данные успешно отправлены",
+        failure: "Ошибка"
+    };
+
+    forms.forEach(item => {
+        postData(item);
+    });
+
+    function postData(form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const statusMessage = document.createElement("div");
+            statusMessage.textContent = message.loading;
+            form.append(statusMessage);
+
+
+            let request = new XMLHttpRequest();
+            request.open('POST', 'server.php');
+            request.setRequestHeader("Content-type", "application/json, charset=utf-8");
+            let formData = new FormData(form);
+            let jsonRequest = {};
+            formData.forEach((item, key) => {
+                jsonRequest[key] = item;
+            });
+
+
+
+            request.send(JSON.stringify(jsonRequest));
+
+            request.addEventListener('load', () => {
+                if (request.status === 200) {
+                    console.log(request.response);
+                    statusMessage.textContent = message.success;
+                    form.append(statusMessage);
+                    form.reset();
+                    setTimeout(() => {
+                        statusMessage.remove();
+                    }, 2000);
+                } else {
+                    statusMessage.textContent = message.failure;
+                    form.append(statusMessage);
+                }
+            });
+        });
+
+    }
 
 
 });// конец DOMContentLoaded
