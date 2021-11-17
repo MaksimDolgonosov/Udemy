@@ -224,7 +224,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let forms = document.querySelectorAll('form');
 
     const message = {
-        loading: "Загрузка...",
+        loading: "img/form/spinner.svg",
         success: "Данные успешно отправлены",
         failure: "Ошибка"
     };
@@ -237,9 +237,15 @@ window.addEventListener("DOMContentLoaded", () => {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const statusMessage = document.createElement("div");
-            statusMessage.textContent = message.loading;
-            form.append(statusMessage);
+            const statusMessage = document.createElement("img");
+            statusMessage.src = message.loading;
+            statusMessage.style.cssText = `
+            display: block;
+            margin: 0 auto;   
+            `;
+
+            //form.append(statusMessage);
+            form.insertAdjacentElement()
 
 
             let request = new XMLHttpRequest();
@@ -258,19 +264,22 @@ window.addEventListener("DOMContentLoaded", () => {
             request.addEventListener('load', () => {
                 if (request.status === 200) {
                     console.log(request.response);
-                    statusMessage.textContent = message.success;
-                    showThanksModal(statusMessage);
+                    //statusMessage.textContent = message.success;
+
+                    showThanksModal(message.success);
                     form.reset();
-                    setTimeout(() => {
-                        statusMessage.remove();
-                    }, 2000);
+
+                    statusMessage.remove();
+
                 } else {
-                    statusMessage.textContent = message.failure;
-                    showThanksModal(statusMessage);
+
+                    showThanksModal(message.failure);
                 }
             });
         });
     }
+
+    // Красивое оповещение пользователя
 
     function showThanksModal(message) {
         const prevModalDialog = document.querySelector(".modal__dialog");
@@ -286,9 +295,35 @@ window.addEventListener("DOMContentLoaded", () => {
         </div>
         `;
         document.querySelector(".modal").append(thanksModal);
+        setTimeout(() => {
+            thanksModal.remove();
+            prevModalDialog.classList.add("show");
+            prevModalDialog.classList.remove("hide");
+            closeModal();
+        }, 4000);
     }
 
+    // function showThanksModal(message) {
+    //     const prevModalDialog = document.querySelector(".modal__content");
+    //     prevModalDialog.classList.add("hide");
+    //     openModal();
 
+    //     let thanksModal = document.createElement("div");
+    //     thanksModal.classList.add("modal__content");
+    //     thanksModal.innerHTML = `
+    //     <div data-close class="modal__close">&times;</div>
+    //     <div class="modal__title">${message}</div>
+    //     `;
+    //     console.log(thanksModal);
+    //     document.querySelector(".modal.dialog").append(thanksModal);
+    //     setTimeout(() => {
+    //         thanksModal.remove();
+    //         prevModalDialog.classList.add("show");
+    //         prevModalDialog.classList.remove("hide");
+    //         closeModal();
+    //     }, 4000);
+    // }
+    // showThanksModal("sdf");
 
 });// конец DOMContentLoaded
 
