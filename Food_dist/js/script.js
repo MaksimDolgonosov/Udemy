@@ -259,34 +259,36 @@ window.addEventListener("DOMContentLoaded", () => {
                 if (request.status === 200) {
                     console.log(request.response);
                     statusMessage.textContent = message.success;
-                    form.append(statusMessage);
+                    showThanksModal(statusMessage);
                     form.reset();
                     setTimeout(() => {
                         statusMessage.remove();
                     }, 2000);
                 } else {
                     statusMessage.textContent = message.failure;
-                    form.append(statusMessage);
+                    showThanksModal(statusMessage);
                 }
             });
         });
     }
 
-    function showThanksModal() {
+    function showThanksModal(message) {
         const prevModalDialog = document.querySelector(".modal__dialog");
         prevModalDialog.classList.add("hide");
         openModal();
 
-        const thanksModal = document.createElement("div");
+        let thanksModal = document.createElement("div");
         thanksModal.classList.add("modal__dialog");
         thanksModal.innerHTML = `
         <div class="modal__content">
         <div data-close class="modal__close">&times;</div>
-        <div class="modal__title">Спасибо!</div>
+        <div class="modal__title">${message}</div>
         </div>
         `;
+        document.querySelector(".modal").append(thanksModal);
     }
-    document.querySelector(".modal").append(thanksModal);
+
+
 
 });// конец DOMContentLoaded
 
