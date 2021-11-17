@@ -245,7 +245,7 @@ window.addEventListener("DOMContentLoaded", () => {
             `;
 
             //form.append(statusMessage);
-            form.insertAdjacentElement()
+            form.insertAdjacentElement("afterend", statusMessage);
 
 
             let request = new XMLHttpRequest();
