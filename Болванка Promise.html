@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input class="adding__input" type="text" placeholder="Что уже посмотрено...?">
+
+    <button>Подтвердить</button>
+
+
+    <script>
+
+        let a = 7;
+
+        let test = time => {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    a = 10;
+                    resolve(a);
+                }, time)
+
+            })
+        }
+
+        test(2000).then((a) => {
+            a += 5;
+            console.log(a);
+        })
+
+        // let sqr = new Promise((resolve, reject) => {
+        //     setTimeout(() => {
+        //         a = 99;
+        //         resolve(a);
+        //     }, 2000);
+
+        // })
+
+        // sqr.then((a) => {
+        //     console.log(a);
+        //     return a += 1;
+
+        // }).then((a) => {
+        //     console.log(a);
+        //     return a = 300;
+        // }).then(a=>{
+        //     console.log(a);
+        // })
+
+
+    </script>
+
+</body>
+
+</html>
