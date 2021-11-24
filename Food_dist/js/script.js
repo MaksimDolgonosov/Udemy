@@ -230,10 +230,23 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     forms.forEach(item => {
-        postData(item);
+        bindPostData(item);
     });
 
-    function postData(form) {
+    const postData = async (url, data) => {
+        let res = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: data
+        });
+        return await res.json();
+    };
+
+
+
+    function bindPostData(form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -248,12 +261,13 @@ window.addEventListener("DOMContentLoaded", () => {
             form.insertAdjacentElement("afterend", statusMessage);
 
             let formData = new FormData(form);
+            let json = JSON.stringify(Object.fromEntries(formData.entries()));
+            // let Object = {};
+            // formData.forEach((item, key) => {
+            //     Object[key] = item;
+            // });
 
-            let Object = {};
-            formData.forEach((item, key) => {
-                Object[key] = item;
-            });
-
+            // ФОРМАТ formData
             // fetch('server.php', {
             //     method: "POST",
             //     body: formData
@@ -277,18 +291,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-            fetch('server.php', {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify(Object)
+            postData(`http://localhost:3000/requests`, json)
 
-            }).then(data => data.text())
                 .then((data) => {
 
                     console.log(data);
-
 
                     showThanksModal(message.success);
                     statusMessage.remove();
@@ -298,6 +305,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 }).finally(() => {
                     form.reset();
                     statusMessage.remove();
+
                 });
 
             // let request = new XMLHttpRequest();
@@ -376,9 +384,9 @@ window.addEventListener("DOMContentLoaded", () => {
         }, 4000);
     }
 
-    fetch(`http://localhost:3000/menu`)
-        .then(data => data.json())
-        .then(data => console.log(data));
+    // fetch(`http://localhost:3000/menu`)
+    //     .then(data => data.json())
+    //     .then(data => console.log(data));
 
 
 
