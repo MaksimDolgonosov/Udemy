@@ -188,36 +188,80 @@ window.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    new Cards(
-        "img/tabs/vegy.jpg",
-        "vegy",
-        'Меню "Фитнес"',
-        'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
-        10,
-        ".menu .container",
-    )
-        .rendle();
 
-    new Cards(
-        "img/tabs/elite.jpg",
-        "elite",
-        'Меню "Премиум"',
-        'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
-        20,
-        ".menu .container",
-        "menu__item")
-        .rendle();
 
-    new Cards(
-        "img/tabs/post.jpg",
-        "post",
-        'Меню "Постное"',
-        'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
-        30,
-        ".menu .container",
-        "menu__item",
-        "big")
-        .rendle();
+
+
+    let getResource = async (url) => {
+        let res = await fetch(url);
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${url}, status: ${res.status}`);
+        }
+        return await res.json();
+    };
+
+    // getResource(`http://localhost:3000/menu`)
+    //     .then(data => {
+    //         data.forEach(({ img, alting, title, descr, price }) => {
+    //             new Cards(img, alting, title, descr, price, `.menu .container`).rendle();
+    //         });
+
+    //     });
+
+    getResource(`http://localhost:3000/menu`)
+        .then(data => createCard(data));
+
+
+    function createCard(data) {
+        data.forEach(({ img, alting, title, descr, price }) => {
+            let element = document.createElement("div");
+            element.classList.add("menu__item");
+            element.innerHTML =
+                `<img src=${img} alt=${alting}>
+            <h3 class="menu__item-subtitle">${title}</h3>
+            <div class="menu__item-descr">${descr}</div>
+            <div class="menu__item-divider"></div>
+            <div class="menu__item-price">
+            <div class="menu__item-cost">Цена:</div>
+            <div class="menu__item-total"><span>${price}</span> грн/день</div>
+            </div>`;
+
+            document.querySelector(".menu .container").append(element);
+        });
+    }
+
+
+
+    // new Cards(
+    //     "img/tabs/vegy.jpg",
+    //     "vegy",
+    //     'Меню "Фитнес"',
+    //     'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+    //     10,
+    //     ".menu .container",
+    // )
+    //     .rendle();
+
+    // new Cards(
+    //     "img/tabs/elite.jpg",
+    //     "elite",
+    //     'Меню "Премиум"',
+    //     'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
+    //     20,
+    //     ".menu .container",
+    //     "menu__item")
+    //     .rendle();
+
+    // new Cards(
+    //     "img/tabs/post.jpg",
+    //     "post",
+    //     'Меню "Постное"',
+    //     'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
+    //     30,
+    //     ".menu .container",
+    //     "menu__item",
+    //     "big")
+    //     .rendle();
 
     // Отправка формы на сервер php
 
@@ -388,8 +432,26 @@ window.addEventListener("DOMContentLoaded", () => {
     //     .then(data => data.json())
     //     .then(data => console.log(data));
 
+    const slides = document.querySelectorAll(".offer__slide");
+    let numberSlides = slides.length;
+
+    const nextBtn = document.querySelector(".offer__slider-next");
+    console.log(nextBtn);
+    nextBtn.addEventListener("click", () => {
+        showSlide(document.querySelector("#current")[1] + 1);
+    });
 
 
+    function showSlide(index = 0) {
+        slides.forEach(arr => arr.classList.add("hide"));
+        slides[index].classList.remove("hide");
+        slides[index].classList.add("show");
+        if (numberSlides < 10) {
+            document.querySelector("#current").textContent = `0${index}`;
+        }
+    }
+
+    showSlide(1);
 });// конец DOMContentLoaded
 
 
