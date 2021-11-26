@@ -432,26 +432,62 @@ window.addEventListener("DOMContentLoaded", () => {
     //     .then(data => data.json())
     //     .then(data => console.log(data));
 
+
+
+    //Слайды
     const slides = document.querySelectorAll(".offer__slide");
-    let numberSlides = slides.length;
+
+    if (slides.length < 10) {
+        document.querySelector("#total").textContent = `0${slides.length}`;
+    } else {
+        document.querySelector("#total").textContent = slides.length;
+    }
 
     const nextBtn = document.querySelector(".offer__slider-next");
-    console.log(nextBtn);
+    const prevBtn = document.querySelector(".offer__slider-prev");
+
+    let nowId = 0;
+    showSlide(nowId);
     nextBtn.addEventListener("click", () => {
-        showSlide(document.querySelector("#current")[1] + 1);
+        nowId = nowId + 1;
+        if (nowId > 3) {
+            reset(0);
+            showSlide(nowId);
+        } else {
+            showSlide(nowId);
+        }
+
     });
 
+    prevBtn.addEventListener("click", () => {
+        nowId = nowId - 1;
+        if (nowId < 0) {
+            reset(slides.length - 1);
+            showSlide(nowId);
+        } else {
+            showSlide(nowId);
+        }
+    });
+    function reset(i) {
+        nowId = i;
+    }
 
-    function showSlide(index = 0) {
-        slides.forEach(arr => arr.classList.add("hide"));
-        slides[index].classList.remove("hide");
-        slides[index].classList.add("show");
-        if (numberSlides < 10) {
-            document.querySelector("#current").textContent = `0${index}`;
+    function showSlide(nowId) {
+
+        slides.forEach(arr => arr.classList.add("hide", "fade"));
+        slides[nowId].classList.remove("hide");
+        slides[nowId].classList.add("show");
+        slides[nowId].classList.remove("show");
+
+
+        if (slides.length < 10) {
+            document.querySelector("#current").textContent = `0${nowId + 1}`;
+        } else {
+            document.querySelector("#current").textContent = nowId + 1;
         }
     }
 
-    showSlide(1);
+
 });// конец DOMContentLoaded
 
 
