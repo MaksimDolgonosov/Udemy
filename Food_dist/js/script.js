@@ -522,6 +522,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     slider.style.position = "relative";
     let indicators = document.createElement('ol');
+    let dots = [];
     indicators.classList.add("carousel-indicators"); // такого класса в данном проекте нет, все стили описаны ниже
     indicators.style.cssText = `
     position: absolute;
@@ -538,6 +539,7 @@ window.addEventListener("DOMContentLoaded", () => {
     slider.append(indicators);
 
     for (let i = 0; i < slides.length; i++) {
+
         const dot = document.createElement('li');
         dot.setAttribute("data-slide-to", i + 1);
         dot.style.cssText = `
@@ -560,7 +562,9 @@ window.addEventListener("DOMContentLoaded", () => {
             dot.style.opacity = 1;
         }
         indicators.append(dot);
+        dots.push(dot);
     }
+
 
 
 
@@ -573,11 +577,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
         slidesField.style.transform = `translateX(-${offset}px)`;
 
+
         if (slideIndex == slides.length) {
             slideIndex = 1;
         } else {
             slideIndex++;
         }
+
+        dots.forEach(dot => {
+            dot.style.opacity = 0.5;
+        });
+        dots[slideIndex - 1].style.opacity = 1;
 
         if (slideIndex < 10) {
             document.querySelector("#current").textContent = `0${slideIndex}`;
@@ -601,6 +611,11 @@ window.addEventListener("DOMContentLoaded", () => {
             slideIndex--;
         }
 
+        dots.forEach(dot => {
+            dot.style.opacity = 0.5;
+        });
+        dots[slideIndex - 1].style.opacity = 1;
+
         if (slideIndex < 10) {
             document.querySelector("#current").textContent = `0${slideIndex}`;
         } else {
@@ -609,6 +624,23 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
 
+    dots.forEach(dot => {
+        dot.addEventListener("click", (e) => {
+            slideIndex = e.target.getAttribute("data-slide-to");
+            if (slideIndex < 10) {
+                document.querySelector("#current").textContent = `0${slideIndex}`;
+            } else {
+                document.querySelector("#current").textContent = slideIndex;
+            }
+            offset = width.slice(0, width.length - 2) * (slideIndex - 1);
+            slidesField.style.transform = `translateX(-${offset}px)`;
+            dots.forEach(dot => {
+                dot.style.opacity = 0.5;
+            });
+            e.target.style.opacity = 1;
+        });
+
+    });
 
 });// конец DOMContentLoaded
 
