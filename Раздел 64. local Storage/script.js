@@ -14,18 +14,38 @@ checkbox.addEventListener("change", () => {
 
 
 
+if (!localStorage.getItem("color")) {
 
-// localStorage.setItem("color", "");
-// form.style.backgroundColor = localStorage.getItem("color");
-// ChangeBtn.addEventListener("click", () => {
-//     if (localStorage.getItem("color")) {
-//         form.style.backgroundColor = localStorage.getItem("color");
+    form.style.backgroundColor = "#fff";
 
-//         localStorage.removeItem("color", "red");
-//     } else {
+} else {
 
-//         form.style.backgroundColor = "#fff";
-//         localStorage.setItem("color", "red");
-//     }
+    form.style.backgroundColor = "red";
 
-// });
+}
+
+
+
+ChangeBtn.addEventListener("click", () => {
+    if (!localStorage.getItem("color")) {
+        form.style.backgroundColor = "red";
+
+        localStorage.setItem("color", "changed");
+    } else {
+
+        form.style.backgroundColor = "#fff";
+        localStorage.removeItem("color");
+    }
+
+});
+
+
+const person = {
+    name: "Alex",
+    age: 25
+
+};
+
+const StoragePersone = JSON.stringify(person);
+localStorage.setItem("Alex", StoragePersone);
+console.log(JSON.parse(localStorage.getItem("Alex")));
