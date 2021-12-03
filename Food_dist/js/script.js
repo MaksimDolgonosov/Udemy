@@ -569,10 +569,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
     nextBtn.addEventListener("click", () => {
-        if (offset == width.slice(0, width.length - 2) * (slides.length - 1)) {
+        if (offset == +width.replace(/\D/g, "") * (slides.length - 1)) {
             offset = 0;
         } else {
-            offset += +width.slice(0, width.length - 2);
+            offset += +width.replace(/\D/g, "");
         }
 
         slidesField.style.transform = `translateX(-${offset}px)`;
@@ -598,9 +598,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
     prevBtn.addEventListener("click", () => {
         if (offset == 0) {
-            offset = width.slice(0, width.length - 2) * (slides.length - 1);
+            offset = width.replace(/\D/g, '') * (slides.length - 1);
         } else {
-            offset -= +width.slice(0, width.length - 2);
+            offset -= +width.replace(/\D/g, "");
         }
 
         slidesField.style.transform = `translateX(-${offset}px)`;
@@ -632,7 +632,7 @@ window.addEventListener("DOMContentLoaded", () => {
             } else {
                 document.querySelector("#current").textContent = slideIndex;
             }
-            offset = width.slice(0, width.length - 2) * (slideIndex - 1);
+            offset = width.replace(/\D/g, "") * (slideIndex - 1);
             slidesField.style.transform = `translateX(-${offset}px)`;
             dots.forEach(dot => {
                 dot.style.opacity = 0.5;
