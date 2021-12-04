@@ -642,6 +642,69 @@ window.addEventListener("DOMContentLoaded", () => {
 
     });
 
+
+    // Калькулятор каллорий
+
+    let result = document.querySelector(".calculating__result span");
+
+    let sex = "female", height, weight, age, ration = 1.375;
+
+    function calc() {
+        if (!height || !weight || !age) {
+            result.textContent = "____";
+            return;
+        }
+
+        if (sex == "female") {
+            result.textContent = Math.round((447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)) * ration);
+        } else {
+            result.textContent = Math.round((88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)) * ration);
+        }
+
+    }
+    calc();
+    document.querySelectorAll("#gender div").forEach((e) => {
+        e.addEventListener("click", (e) => {
+            sex = e.target.getAttribute("id");
+
+            document.querySelectorAll("#gender div").forEach((e) => {
+                e.classList.remove("calculating__choose-item_active");
+            });
+            e.target.classList.add("calculating__choose-item_active");
+
+            calc();
+        });
+    });
+
+
+    document.querySelectorAll(".calculating__choose_big div").forEach((e) => {
+        e.addEventListener("click", (e) => {
+            ration = e.target.getAttribute(`data-ration`);
+
+            document.querySelectorAll(".calculating__choose_big div").forEach(e => {
+                e.classList.remove("calculating__choose-item_active");
+            });
+
+            e.target.classList.add("calculating__choose-item_active");
+
+            calc();
+        });
+    });
+
+    document.querySelectorAll(".calculating__choose_medium input").forEach(e => {
+        e.addEventListener("input", e => {
+            weight = +document.querySelector("#weight").value;
+            height = +document.querySelector("#height").value;
+            age = +document.querySelector("#age").value;
+            calc();
+        });
+    });
+
+
+
+
+
+
 });// конец DOMContentLoaded
 
 
