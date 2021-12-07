@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input class="adding__input" type="text" placeholder="Что уже посмотрено...?">
+
+    <button>Подтвердить</button>
+
+
+    <script>
+
+        class User {
+
+            constructor(name, age) {
+                this.name = name;
+                this._age = age;
+            }
+            #surname = "Dolgonosov";
+            say = () => {
+                console.log(this);
+            }
+            get surname() {
+                return this.#surname;
+            }
+            set surname(surname) {
+                this.#surname = surname;
+            }
+
+
+            get age() {
+                return this._age;
+            }
+            set age(age) {
+                this._age = age;
+            }
+
+
+
+
+        };
+
+        let Maksim = new User("Maksim", 31);
+        Maksim.say();
+        console.log(Maksim.surname);
+
+
+    </script>
+
+</body>
+
+</html>
