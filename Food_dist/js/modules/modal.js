@@ -1,3 +1,20 @@
+function openModal() {
+    modal.classList.add("show");
+    modal.classList.remove("hide");
+    // modal.classList.toggle("show");
+    document.body.style.overflow = "hidden";
+    clearTimeout(setTimeoutId);
+}
+
+function closeModal() {
+    modal.classList.add("hide");
+    modal.classList.remove("show");
+    // modal.classList.toggle("show");
+    document.body.style.overflow = "";
+}
+
+
+
 function modal() {
     // Открытие модального окна
     const modal = document.querySelector(".modal");
@@ -16,20 +33,7 @@ function modal() {
 
     const setTimeoutId = setTimeout(openModal, 9997000);
 
-    function openModal() {
-        modal.classList.add("show");
-        modal.classList.remove("hide");
-        // modal.classList.toggle("show");
-        document.body.style.overflow = "hidden";
-        clearTimeout(setTimeoutId);
-    }
 
-    function closeModal() {
-        modal.classList.add("hide");
-        modal.classList.remove("show");
-        // modal.classList.toggle("show");
-        document.body.style.overflow = "";
-    }
 
     //btnClose.addEventListener("click", closeModal);
 
@@ -58,4 +62,5 @@ function modal() {
 
 }
 
-module.exports = modal;
+export default modal;
+export { openModal, closeModal };

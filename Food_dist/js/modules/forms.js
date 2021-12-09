@@ -1,3 +1,5 @@
+import { openModal, closeModal } from "./modal";
+
 function forms() {
     // Отправка формы на сервер php
 
@@ -169,4 +171,4 @@ function forms() {
     //     .then(data => console.log(data));
 }
 
-module.exports = forms;
+export default forms;
