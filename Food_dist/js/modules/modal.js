@@ -1,4 +1,5 @@
-function openModal() {
+function openModal(modalSelector) {
+    const modal = document.querySelector(modalSelector);
     modal.classList.add("show");
     modal.classList.remove("hide");
     // modal.classList.toggle("show");
@@ -6,7 +7,8 @@ function openModal() {
     clearTimeout(setTimeoutId);
 }
 
-function closeModal() {
+function closeModal(modalSelector) {
+    const modal = document.querySelector(modalSelector);
     modal.classList.add("hide");
     modal.classList.remove("show");
     // modal.classList.toggle("show");
@@ -15,17 +17,17 @@ function closeModal() {
 
 
 
-function modal() {
+function modal(triggerSelector, modalSelector) {
     // Открытие модального окна
-    const modal = document.querySelector(".modal");
+    const modal = document.querySelector(modalSelector);
     //const styleOfModal=window.getComputedStyle(modal);
     //console.log(styleOfModal);
 
-    const modalTrigger = document.querySelectorAll("[data-modal");
+    const modalTrigger = document.querySelectorAll(triggerSelector);
     // const btnClose = document.querySelector("[data-close]");
 
     modalTrigger.forEach(btn => {
-        btn.addEventListener("click", openModal);
+        btn.addEventListener("click", () => openModal(modalSelector));
     });
 
 
@@ -39,19 +41,19 @@ function modal() {
 
     modal.addEventListener("click", (e) => {
         if (e.target === modal || e.target.classList.contains(`modal__close`)) {  //e.target.getAttribute(`modal-close`)=="";
-            closeModal();
+            closeModal(modalSelector);
         }
     });
 
     document.addEventListener("keydown", (e) => {
         if (e.code == "Escape" && modal.classList.contains("show")) {
-            closeModal();
+            closeModal(modalSelector);
         }
     });
 
     function openModalInTheEnd() {
         if (document.documentElement.scrollTop + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
-            openModal();
+            openModal(modalSelector);
             window.removeEventListener("scroll", openModalInTheEnd);
         }
 
@@ -63,4 +65,5 @@ function modal() {
 }
 
 export default modal;
-export { openModal, closeModal };
+export { openModal };
+export { closeModal };

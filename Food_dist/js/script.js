@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", () => {
     cards();
     slides();
     timer();
-    modal();
+    modal("[data-modal]", ".modal");
     calc();
     forms();
 

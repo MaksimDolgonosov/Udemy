@@ -471,7 +471,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "openModal": () => (/* binding */ openModal),
 /* harmony export */   "closeModal": () => (/* binding */ closeModal)
 /* harmony export */ });
-function openModal() {
+function openModal(modalSelector) {
+    const modal = document.querySelector(modalSelector);
     modal.classList.add("show");
     modal.classList.remove("hide");
     // modal.classList.toggle("show");
@@ -479,7 +480,8 @@ function openModal() {
     clearTimeout(setTimeoutId);
 }
 
-function closeModal() {
+function closeModal(modalSelector) {
+    const modal = document.querySelector(modalSelector);
     modal.classList.add("hide");
     modal.classList.remove("show");
     // modal.classList.toggle("show");
@@ -488,17 +490,17 @@ function closeModal() {
 
 
 
-function modal() {
+function modal(triggerSelector, modalSelector) {
     // Открытие модального окна
-    const modal = document.querySelector(".modal");
+    const modal = document.querySelector(modalSelector);
     //const styleOfModal=window.getComputedStyle(modal);
     //console.log(styleOfModal);
 
-    const modalTrigger = document.querySelectorAll("[data-modal");
+    const modalTrigger = document.querySelectorAll(triggerSelector);
     // const btnClose = document.querySelector("[data-close]");
 
     modalTrigger.forEach(btn => {
-        btn.addEventListener("click", openModal);
+        btn.addEventListener("click", () => openModal(modalSelector));
     });
 
 
@@ -512,19 +514,19 @@ function modal() {
 
     modal.addEventListener("click", (e) => {
         if (e.target === modal || e.target.classList.contains(`modal__close`)) {  //e.target.getAttribute(`modal-close`)=="";
-            closeModal();
+            closeModal(modalSelector);
         }
     });
 
     document.addEventListener("keydown", (e) => {
         if (e.code == "Escape" && modal.classList.contains("show")) {
-            closeModal();
+            closeModal(modalSelector);
         }
     });
 
     function openModalInTheEnd() {
         if (document.documentElement.scrollTop + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
-            openModal();
+            openModal(modalSelector);
             window.removeEventListener("scroll", openModalInTheEnd);
         }
 
@@ -536,6 +538,7 @@ function modal() {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modal);
+
 
 
 /***/ }),
@@ -984,7 +987,7 @@ window.addEventListener("DOMContentLoaded", () => {
     (0,_modules_cards__WEBPACK_IMPORTED_MODULE_1__["default"])();
     (0,_modules_slides__WEBPACK_IMPORTED_MODULE_2__["default"])();
     (0,_modules_timer__WEBPACK_IMPORTED_MODULE_3__["default"])();
-    (0,_modules_modal__WEBPACK_IMPORTED_MODULE_4__["default"])();
+    (0,_modules_modal__WEBPACK_IMPORTED_MODULE_4__["default"])("[data-modal]", ".modal");
     (0,_modules_calc__WEBPACK_IMPORTED_MODULE_5__["default"])();
     (0,_modules_forms__WEBPACK_IMPORTED_MODULE_6__["default"])();
 
