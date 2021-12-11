@@ -6,10 +6,10 @@ import timer from "./modules/timer";
 import modal from "./modules/modal";
 import calc from "./modules/calc";
 import forms from "./modules/forms";
-
+import { openModal } from "./modules/modal";
 
 window.addEventListener("DOMContentLoaded", () => {
-
+    const setTimeoutId = setTimeout(() => openModal(modalSelector, setTimeoutId), 9997000);
 
     tabs();
     cards();

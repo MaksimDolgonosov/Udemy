@@ -471,13 +471,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "openModal": () => (/* binding */ openModal),
 /* harmony export */   "closeModal": () => (/* binding */ closeModal)
 /* harmony export */ });
-function openModal(modalSelector) {
+
+
+function openModal(modalSelector, setTimeoutId,) {
     const modal = document.querySelector(modalSelector);
     modal.classList.add("show");
     modal.classList.remove("hide");
     // modal.classList.toggle("show");
     document.body.style.overflow = "hidden";
-    clearTimeout(setTimeoutId);
+    if (setTimeoutId) {
+        console.log(setTimeoutId);
+        clearTimeout(setTimeoutId);
+    }
 }
 
 function closeModal(modalSelector) {
@@ -490,7 +495,7 @@ function closeModal(modalSelector) {
 
 
 
-function modal(triggerSelector, modalSelector) {
+function modal(triggerSelector, modalSelector, setTimeoutId) {
     // Открытие модального окна
     const modal = document.querySelector(modalSelector);
     //const styleOfModal=window.getComputedStyle(modal);
@@ -500,13 +505,13 @@ function modal(triggerSelector, modalSelector) {
     // const btnClose = document.querySelector("[data-close]");
 
     modalTrigger.forEach(btn => {
-        btn.addEventListener("click", () => openModal(modalSelector));
+        btn.addEventListener("click", () => openModal(modalSelector, setTimeoutId));
     });
 
 
 
 
-    const setTimeoutId = setTimeout(openModal, 9997000);
+
 
 
 
@@ -526,7 +531,7 @@ function modal(triggerSelector, modalSelector) {
 
     function openModalInTheEnd() {
         if (document.documentElement.scrollTop + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
-            openModal(modalSelector);
+            openModal(modalSelector, setTimeoutId);
             window.removeEventListener("scroll", openModalInTheEnd);
         }
 
@@ -981,7 +986,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 window.addEventListener("DOMContentLoaded", () => {
-
+    const setTimeoutId = setTimeout(() => (0,_modules_modal__WEBPACK_IMPORTED_MODULE_4__.openModal)(modalSelector, setTimeoutId), 9997000);
 
     (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])();
     (0,_modules_cards__WEBPACK_IMPORTED_MODULE_1__["default"])();
