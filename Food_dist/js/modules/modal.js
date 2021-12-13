@@ -1,6 +1,6 @@
 
 
-function openModal(modalSelector, setTimeoutId,) {
+function openModal(modalSelector, setTimeoutId) {
     const modal = document.querySelector(modalSelector);
     modal.classList.add("show");
     modal.classList.remove("hide");

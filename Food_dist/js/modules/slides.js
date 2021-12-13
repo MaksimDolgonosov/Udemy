@@ -1,4 +1,4 @@
-function slides() {
+function slides({ container, slide, nextArrow, prevArrow, wrapper, field, totalCounter, currentCounter }) {
     //Слайды
     // const slides = document.querySelectorAll(".offer__slide");
 
@@ -55,23 +55,24 @@ function slides() {
 
     // слайды второй вариант
 
-    const slides = document.querySelectorAll(".offer__slide");
-    const slider = document.querySelector(".offer__slider");
-    const slidesWrapper = document.querySelector(".offer__slider-wrapper");
-    const slidesField = document.querySelector(".offer__slider-inner");
+    const slides = document.querySelectorAll(slide);
+    const slider = document.querySelector(container);
+    const slidesWrapper = document.querySelector(wrapper);
+    const slidesField = document.querySelector(field);
+    const total = document.querySelector(totalCounter);
+    const current = document.querySelector(currentCounter);
+    const nextBtn = document.querySelector(nextArrow);
+    const prevBtn = document.querySelector(prevArrow);
     const width = window.getComputedStyle(slidesWrapper).width;
-    const nextBtn = document.querySelector(".offer__slider-next");
-    const prevBtn = document.querySelector(".offer__slider-prev");
-
     let offset = 0;
     let slideIndex = 1;
 
     if (slides.length < 10) {
-        document.querySelector("#total").textContent = `0${slides.length}`;
-        document.querySelector("#current").textContent = `0${slideIndex}`;
+        total.textContent = `0${slides.length}`;
+        current.textContent = `0${slideIndex}`;
     } else {
-        document.querySelector("#total").textContent = slides.length;
-        document.querySelector("#current").textContent = slideIndex;
+        total.textContent = slides.length;
+        current.textContent = slideIndex;
     }
 
 

@@ -1,9 +1,10 @@
 import { openModal, closeModal } from "./modal";
+import { postData } from "../services/services";
 
-function forms() {
+function forms(formSelector, setTimeoutId) {
     // Отправка формы на сервер php
 
-    let forms = document.querySelectorAll('form');
+    let forms = document.querySelectorAll(formSelector);
 
     const message = {
         loading: "img/form/spinner.svg",
@@ -15,16 +16,7 @@ function forms() {
         bindPostData(item);
     });
 
-    const postData = async (url, data) => {
-        let res = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: data
-        });
-        return await res.json();
-    };
+
 
 
 
@@ -148,7 +140,7 @@ function forms() {
     function showThanksModal(message) {
         const prevModalDialog = document.querySelector(".modal__content");
         prevModalDialog.classList.add("hide");
-        openModal();
+        openModal(".modal", setTimeoutId);
 
         let thanksModal = document.createElement("div");
         thanksModal.classList.add("modal__content");
@@ -162,7 +154,7 @@ function forms() {
             thanksModal.remove();
             prevModalDialog.classList.add("show");
             prevModalDialog.classList.remove("hide");
-            closeModal();
+            closeModal(".modal");
         }, 4000);
     }
 

@@ -1,7 +1,7 @@
-function timer() {
+function timer(id, deadline) {
     // Таймер
 
-    const deadline = '2021-11-10';
+
     // console.log(Date.parse('2021-11-04'));
     // let T= Date.parse(deadline)-Date.parse(new Date());
     // console.log(T/(1000*60*60));
@@ -52,7 +52,7 @@ function timer() {
             }
         }
     }
-    setClock(".timer", deadline);
+    setClock(id, deadline);
 
     function getZero(num) {
         if (num > 0 && num < 10) {
