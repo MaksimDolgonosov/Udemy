@@ -35,13 +35,6 @@ function modal(triggerSelector, modalSelector, setTimeoutId) {
         btn.addEventListener("click", () => openModal(modalSelector, setTimeoutId));
     });
 
-
-
-
-
-
-
-
     //btnClose.addEventListener("click", closeModal);
 
     modal.addEventListener("click", (e) => {
