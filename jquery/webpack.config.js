@@ -21,9 +21,9 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [['@babel/preset-env', {
-                debug: true,
-                corejs: 3,
-                useBuiltIns: "usage"
+              debug: true,
+              corejs: 3,
+              useBuiltIns: "usage"
             }]]
           }
         }
